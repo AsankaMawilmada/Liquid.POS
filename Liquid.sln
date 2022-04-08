@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{708F6496-FCB7-45D4-BC03-3371C294D38D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{85613D20-DC4B-474C-8196-2A34B47F2675}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{092DF473-F2E3-4892-B7C3-374E94A444D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{395D397F-6E83-4081-A5CC-C2855BB766E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liquid.API", "Liquid.API\Liquid.API.csproj", "{0782FF02-A7F5-4D47-81DD-C828164FBA57}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liquid.Core", "Liquid.Core\Liquid.Core.csproj", "{5FE09960-9F99-4CCB-9C6B-E8E858EB6FB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liquid.Infrastructure", "Liquid.Infrastructure\Liquid.Infrastructure.csproj", "{AFC4A5BC-891E-4D18-8E85-CDE28CB53C42}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liquid.Persistence", "Liquid.Persistence\Liquid.Persistence.csproj", "{8F4397BD-934F-4AB0-BE70-D681A50B36D2}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Liquid.UI", "Liquid.UI\", "{536DFEBD-10D7-4750-8133-63C203563C5E}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_53860"
+		Debug.AspNetCompiler.PhysicalPath = "Liquid.UI\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53860\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_53860"
+		Release.AspNetCompiler.PhysicalPath = "Liquid.UI\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53860\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "53860"
+		SlnRelativePath = "Liquid.UI\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0782FF02-A7F5-4D47-81DD-C828164FBA57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0782FF02-A7F5-4D47-81DD-C828164FBA57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0782FF02-A7F5-4D47-81DD-C828164FBA57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0782FF02-A7F5-4D47-81DD-C828164FBA57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FE09960-9F99-4CCB-9C6B-E8E858EB6FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE09960-9F99-4CCB-9C6B-E8E858EB6FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE09960-9F99-4CCB-9C6B-E8E858EB6FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE09960-9F99-4CCB-9C6B-E8E858EB6FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFC4A5BC-891E-4D18-8E85-CDE28CB53C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFC4A5BC-891E-4D18-8E85-CDE28CB53C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFC4A5BC-891E-4D18-8E85-CDE28CB53C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFC4A5BC-891E-4D18-8E85-CDE28CB53C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F4397BD-934F-4AB0-BE70-D681A50B36D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4397BD-934F-4AB0-BE70-D681A50B36D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4397BD-934F-4AB0-BE70-D681A50B36D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4397BD-934F-4AB0-BE70-D681A50B36D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536DFEBD-10D7-4750-8133-63C203563C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536DFEBD-10D7-4750-8133-63C203563C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536DFEBD-10D7-4750-8133-63C203563C5E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{536DFEBD-10D7-4750-8133-63C203563C5E}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5FE09960-9F99-4CCB-9C6B-E8E858EB6FB4} = {708F6496-FCB7-45D4-BC03-3371C294D38D}
+		{AFC4A5BC-891E-4D18-8E85-CDE28CB53C42} = {85613D20-DC4B-474C-8196-2A34B47F2675}
+		{8F4397BD-934F-4AB0-BE70-D681A50B36D2} = {092DF473-F2E3-4892-B7C3-374E94A444D2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA183056-E98F-40EE-BE47-C6583AF02FD5}
+	EndGlobalSection
+EndGlobal

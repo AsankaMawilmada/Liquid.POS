@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+/.vs/Liquid
+/Liquid.API/bin/Debug
+/Liquid.API/obj
+/Liquid.Core/bin/Debug
+/Liquid.Core/obj
+/Liquid.Infrastructure/bin/Debug
+/Liquid.Infrastructure/obj
+/Liquid.UI/.vscode
+/Liquid.Persistence/bin/Debug/net5.0
+/Liquid.Persistence/obj
