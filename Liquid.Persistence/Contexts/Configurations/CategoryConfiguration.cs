@@ -10,6 +10,8 @@ namespace Liquid.Persistence.Contexts.Configurations
         {
             builder.ToTable(nameof(Category));
             builder.Property(x => x.CategoryGuId).HasColumnType("UniqueIdentifier").HasDefaultValueSql("NEWID()");
+            builder.Property(x => x.Name).HasColumnType("nvarchar(255)").IsRequired();
+            builder.Property(x => x.Description).HasColumnType("nvarchar(1000)");
         }
     }
 }

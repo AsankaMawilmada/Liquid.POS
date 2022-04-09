@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Liquid.Persistence.Migrations
 {
     [DbContext(typeof(LiquidContext))]
-    [Migration("20220408143507_InitialCreate")]
+    [Migration("20220408235818_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,12 +35,12 @@ namespace Liquid.Persistence.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTimeOffset>("UpdatedOn")
                         .HasColumnType("datetimeoffset");
@@ -59,16 +59,16 @@ namespace Liquid.Persistence.Migrations
                     b.Property<string>("AddressLine1")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("AddressLine2")
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
@@ -81,21 +81,21 @@ namespace Liquid.Persistence.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("State")
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTimeOffset>("UpdatedOn")
                         .HasColumnType("datetimeoffset");
@@ -120,12 +120,12 @@ namespace Liquid.Persistence.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(70)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<Guid>("ProductGuId")
                         .ValueGeneratedOnAdd()
@@ -180,7 +180,7 @@ namespace Liquid.Persistence.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("smallint");
 
                     b.Property<DateTimeOffset>("UpdatedOn")
                         .HasColumnType("datetimeoffset");
@@ -191,7 +191,7 @@ namespace Liquid.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductTransactions");
+                    b.ToTable("ProductTransaction");
                 });
 
             modelBuilder.Entity("Liquid.Core.Entities.Supplier", b =>
@@ -203,16 +203,16 @@ namespace Liquid.Persistence.Migrations
                     b.Property<string>("AddressLine1")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("AddressLine2")
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
@@ -220,21 +220,21 @@ namespace Liquid.Persistence.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(75)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("State")
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("SupplierGuId")
                         .ValueGeneratedOnAdd()
@@ -256,7 +256,7 @@ namespace Liquid.Persistence.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
@@ -266,24 +266,22 @@ namespace Liquid.Persistence.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<byte[]>("Hash")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varbinary(MAX)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<int>("Role")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("smallint");
 
                     b.Property<byte[]>("Salt")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varbinary(MAX)");
 
                     b.Property<DateTimeOffset>("UpdatedOn")
                         .HasColumnType("datetimeoffset");
@@ -295,8 +293,7 @@ namespace Liquid.Persistence.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(75)");
 
                     b.HasKey("UserId");
 

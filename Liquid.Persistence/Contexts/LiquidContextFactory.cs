@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Liquid.Persistence.Contexts
 {
-    public class SalesContextFactory : IDesignTimeDbContextFactory<LiquidContext>
+    public class LiquidContextFactory : IDesignTimeDbContextFactory<LiquidContext>
     {
         public LiquidContext CreateDbContext(string[] args)
         {

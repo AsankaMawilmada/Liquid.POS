@@ -10,9 +10,14 @@ namespace Liquid.Persistence.Contexts.Configurations
         {
             builder.ToTable(nameof(User));
             builder.Property(x => x.UserGuId).HasColumnType("UniqueIdentifier").HasDefaultValueSql("NEWID()");
-            builder.Property(x => x.Hash).HasColumnType("TEXT");
-            builder.Property(x => x.Salt).HasColumnType("TEXT");
+            builder.Property(x => x.Hash).HasColumnType("varbinary(MAX)").IsRequired();
+            builder.Property(x => x.Salt).HasColumnType("varbinary(MAX)").IsRequired();
+            builder.Property(x => x.FirstName).HasColumnType("nvarchar(75)").IsRequired();
+            builder.Property(x => x.LastName).HasColumnType("nvarchar(75)").IsRequired();
+            builder.Property(x => x.DateOfBirth).HasColumnType("datetime").IsRequired();
+            builder.Property(x => x.Username).HasColumnType("nvarchar(75)").IsRequired();
+            builder.Property(x => x.Role).HasColumnType("smallint").IsRequired();
+            builder.Property(x => x.Active).HasColumnType("bit").IsRequired();
         }
     }
-
 }

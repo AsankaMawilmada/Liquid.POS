@@ -28,7 +28,9 @@ namespace Liquid.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductTransactionConfiguration());
         }
+
 
         #region Transaction Handling
         public void BeginTransaction()

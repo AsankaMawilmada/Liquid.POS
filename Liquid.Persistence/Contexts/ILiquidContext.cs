@@ -8,21 +8,20 @@ namespace Liquid.Persistence.Contexts
 {
     public interface ILiquidContext
     {
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<ProductTransaction> ProductTransactions { get; set; }
-        public DbSet<User> Users { get; set; }
+        DbSet<Category> Categories { get; set; }
+        DbSet<Customer> Customers { get; set; }
+        DbSet<Product> Products { get; set; }
+        DbSet<Supplier> Suppliers { get; set; }
+        DbSet<ProductTransaction> ProductTransactions { get; set; }
+        DbSet<User> Users { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
 
-        public void BeginTransaction();
+        void BeginTransaction();
 
-        public void CommitTransaction();
+        void CommitTransaction();
 
-        public void RollbackTransaction();
-        public DatabaseFacade Database { get; }
-
+        void RollbackTransaction();
+        DatabaseFacade Database { get; }
     }
 }

@@ -23,7 +23,7 @@
 
 
 //        [HttpPost("login")]
-//        public Task<UserEnvelope> Login([FromBody] Login.Command command, CancellationToken cancellationToken)
+//        public Task<UserEnvelope> LoginEndpoint([FromBody] LoginEndpoint.Command command, CancellationToken cancellationToken)
 //        {
 //            return _mediator.Send(command, cancellationToken);
 //        }

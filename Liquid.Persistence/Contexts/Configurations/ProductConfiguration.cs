@@ -10,6 +10,10 @@ namespace Liquid.Persistence.Contexts.Configurations
         {
             builder.ToTable(nameof(Product));
             builder.Property(x => x.ProductGuId).HasColumnType("UniqueIdentifier").HasDefaultValueSql("NEWID()");
+            builder.Property(x => x.Name).HasColumnType("nvarchar(70)").IsRequired();
+            builder.Property(x => x.Description).HasColumnType("nvarchar(1000)");
+            builder.Property(x => x.PurchasedPrice).IsRequired();
+            builder.Property(x => x.RegularPrice).IsRequired();
         }
     }
 }

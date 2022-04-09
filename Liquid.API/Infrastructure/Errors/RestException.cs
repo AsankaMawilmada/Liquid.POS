@@ -15,4 +15,9 @@ namespace Liquid.API.Infrastructure.Errors
 
         public HttpStatusCode Code { get; }
     }
+
+    public class GenericRestException
+    {
+        public string Errors { get; set; }
+    }
 }
