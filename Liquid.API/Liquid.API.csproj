@@ -38,6 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Account\" />
+    <Folder Include="Features\Accounts\" />
   </ItemGroup>
 </Project>

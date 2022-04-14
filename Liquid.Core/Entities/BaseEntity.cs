@@ -9,6 +9,6 @@ namespace Liquid.Core.Entities
         public DateTimeOffset CreatedOn { get; set; }
 
         [Column(TypeName = "datetimeoffset")]
-        public DateTimeOffset UpdatedOn { get; set; }
+        public DateTimeOffset? UpdatedOn { get; set; }
     }
 }

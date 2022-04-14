@@ -7,9 +7,7 @@ namespace Liquid.Core.Entities
     public class ProductTransaction : BaseEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductPurchaseId { get; set; }
-
-        [Required, MaxLength(70)]
+        public int ProductTransactionId { get; set; }
         public string ProductOrderNumber { get; set; }
 
         [ForeignKey("Product")]
@@ -17,15 +15,9 @@ namespace Liquid.Core.Entities
 
         [ForeignKey("Customer")]
         public int? CustomerId { get; set; }
-
-        [Required]
         public int Quantity { get; set; }
-
-        [Required]
         public decimal PurchasedPrice { get; set; }
-
         public ProductTransactionType Type { get; set; }
-
         public Product Product { get; set; }
         public Customer? Customer { get; set; }
     }

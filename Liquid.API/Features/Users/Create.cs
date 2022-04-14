@@ -1,84 +1,62 @@
-//using System;
-//using System.Linq;
-//using System.Net;
-//using System.Threading;
-//using System.Threading.Tasks;
-//using AutoMapper;
-//using Sales.API.Infrastructure;
-//using Sales.API.Infrastructure.Errors;
-//using Sales.API.Infrastructure.Security;
-//using FluentValidation;
-//using MediatR;
-//using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
+using AutoMapper;
+using Liquid.API.Features.Users.Commands;
+using Liquid.API.Features.Users.Envelopes;
+using Liquid.API.Infrastructure.Errors;
+using Liquid.Core.Constants;
+using Liquid.Core.Entities;
+using Liquid.Core.Services.Interfaces.Security;
+using Liquid.Persistence.Contexts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
-//namespace Sales.API.Features.Users
-//{
-//    public class Create
-//    {
-//        public class UserData
-//        {
-//            public string? Username { get; set; }
+namespace Liquid.API.Features.Users
+{
+    public class Create : EndpointBaseAsync
+        .WithRequest<CreateCommand>
+        .WithActionResult<UserEnvelope>
+    {
+        private readonly ILiquidContext _context;
+        private readonly IPasswordHasher _passwordHasher;
+        private readonly IMapper _mapper;
 
-//            public string? Email { get; set; }
+        public Create(ILiquidContext context, IPasswordHasher passwordHasher, IMapper mapper)
+        {
+            _context = context;
+            _passwordHasher = passwordHasher;
+            _mapper = mapper;
+        }
 
-//            public string? Password { get; set; }
-//        }
+        [HttpPost("api/user/create")]
+        [Authorize(Policy = PolicyConstants.RequireAdministratorRole)]
+        [ProducesResponseType(typeof(UserEnvelope), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(GenericRestException), StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(
+            Summary = "Creates a user",
+            Description = "Creates a user",
+            OperationId = "User.Create")]
+        public override async Task<ActionResult<UserEnvelope>> HandleAsync([FromBody] CreateCommand request, CancellationToken cancellationToken)
+        {
+            if (await _context.Users.Where(x => x.Username == request.Username).AnyAsync(cancellationToken))
+                throw new RestException(HttpStatusCode.BadRequest, new { Username = Constants.IN_USE });
 
-//        public record Command(UserData User) : IRequest<UserEnvelope>;
+            var user = _mapper.Map<User>(request);
+            
+            user.Salt = Guid.NewGuid().ToByteArray();
+            user.Hash = await _passwordHasher.Hash(request.Password, user.Salt);
 
-//        public class CommandValidator : AbstractValidator<Command>
-//        {
-//            public CommandValidator()
-//            {
-//                RuleFor(x => x.User.Username).NotNull().NotEmpty();
-//                RuleFor(x => x.User.Email).NotNull().NotEmpty();
-//                RuleFor(x => x.User.Password).NotNull().NotEmpty();
-//            }
-//        }
+            await _context.Users.AddAsync(user, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
-//        public class Handler : IRequestHandler<Command, UserEnvelope>
-//        {
-//            private readonly Sales.APIContext _context;
-//            private readonly IPasswordHasher _passwordHasher;
-//            private readonly IJwtTokenGenerator _jwtTokenGenerator;
-//            private readonly IMapper _mapper;
-
-//            public Handler(Sales.APIContext context, IPasswordHasher passwordHasher, IJwtTokenGenerator jwtTokenGenerator, IMapper mapper)
-//            {
-//                _context = context;
-//                _passwordHasher = passwordHasher;
-//                _jwtTokenGenerator = jwtTokenGenerator;
-//                _mapper = mapper;
-//            }
-
-//            public async Task<UserEnvelope> Handle(Command message, CancellationToken cancellationToken)
-//            {
-//                if (await _context.Persons.Where(x => x.Username == message.User.Username).AnyAsync(cancellationToken))
-//                {
-//                    throw new RestException(HttpStatusCode.BadRequest, new { Username = Constants.IN_USE });
-//                }
-
-//                if (await _context.Persons.Where(x => x.Email == message.User.Email).AnyAsync(cancellationToken))
-//                {
-//                    throw new RestException(HttpStatusCode.BadRequest, new { Email = Constants.IN_USE });
-//                }
-
-//                var salt = Guid.NewGuid().ToByteArray();
-//                var person = new Person
-//                {
-//                    Username = message.User.Username,
-//                    Email = message.User.Email,
-//                    Hash = await _passwordHasher.Hash(message.User.Password ?? throw new InvalidOperationException(), salt),
-//                    Salt = salt
-//                };
-
-//                await _context.Persons.AddAsync(person, cancellationToken);
-//                await _context.SaveChangesAsync(cancellationToken);
-
-//                var user = _mapper.Map<Person, User>(person);
-//                user.Token = _jwtTokenGenerator.CreateToken(person.Username ?? throw new InvalidOperationException());
-//                return new UserEnvelope(user);
-//            }
-//        }
-//    }
-//}
+            return Created("",_mapper.Map<User, UserEnvelope>(user));
+        }
+    }
+}

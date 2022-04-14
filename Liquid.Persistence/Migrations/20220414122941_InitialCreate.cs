@@ -7,17 +7,21 @@ namespace Liquid.Persistence.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Liquid");
+
             migrationBuilder.CreateTable(
                 name: "Category",
+                schema: "Liquid",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryGuId = table.Column<Guid>(type: "UniqueIdentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,20 +30,21 @@ namespace Liquid.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Customer",
+                schema: "Liquid",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerGuId = table.Column<Guid>(type: "UniqueIdentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    AddressLine1 = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    AddressLine2 = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    AddressLine1 = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(15)", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,20 +53,21 @@ namespace Liquid.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Supplier",
+                schema: "Liquid",
                 columns: table => new
                 {
-                    SupplierId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    SupplierId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SupplierGuId = table.Column<Guid>(type: "UniqueIdentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    AddressLine1 = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    AddressLine2 = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(75)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    AddressLine1 = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(15)", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,10 +76,11 @@ namespace Liquid.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "User",
+                schema: "Liquid",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserGuId = table.Column<Guid>(type: "UniqueIdentifier", nullable: false, defaultValueSql: "NEWID()"),
                     FirstName = table.Column<string>(type: "nvarchar(75)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(75)", nullable: false),
@@ -81,10 +88,10 @@ namespace Liquid.Persistence.Migrations
                     Username = table.Column<string>(type: "nvarchar(75)", nullable: false),
                     Hash = table.Column<byte[]>(type: "varbinary(MAX)", nullable: false),
                     Salt = table.Column<byte[]>(type: "varbinary(MAX)", nullable: false),
-                    Role = table.Column<int>(type: "smallint", nullable: false),
+                    Role = table.Column<short>(type: "smallint", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -93,19 +100,20 @@ namespace Liquid.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Product",
+                schema: "Liquid",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProductGuId = table.Column<Guid>(type: "UniqueIdentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SupplierId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    PurchasedPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    RegularPrice = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(70)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    SupplierId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    PurchasedPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RegularPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -113,12 +121,14 @@ namespace Liquid.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Product_Category_CategoryId",
                         column: x => x.CategoryId,
+                        principalSchema: "Liquid",
                         principalTable: "Category",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Product_Supplier_SupplierId",
                         column: x => x.SupplierId,
+                        principalSchema: "Liquid",
                         principalTable: "Supplier",
                         principalColumn: "SupplierId",
                         onDelete: ReferentialAction.Cascade);
@@ -126,31 +136,34 @@ namespace Liquid.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ProductTransaction",
+                schema: "Liquid",
                 columns: table => new
                 {
-                    ProductPurchaseId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ProductOrderNumber = table.Column<string>(type: "TEXT", maxLength: 70, nullable: false),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CustomerId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    PurchasedPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Type = table.Column<int>(type: "smallint", nullable: false),
+                    ProductTransactionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductOrderNumber = table.Column<string>(type: "nvarchar(70)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    PurchasedPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Type = table.Column<short>(type: "smallint", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductTransaction", x => x.ProductPurchaseId);
+                    table.PrimaryKey("PK_ProductTransaction", x => x.ProductTransactionId);
                     table.ForeignKey(
                         name: "FK_ProductTransaction_Customer_CustomerId",
                         column: x => x.CustomerId,
+                        principalSchema: "Liquid",
                         principalTable: "Customer",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ProductTransaction_Product_ProductId",
                         column: x => x.ProductId,
+                        principalSchema: "Liquid",
                         principalTable: "Product",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
@@ -158,21 +171,25 @@ namespace Liquid.Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
+                schema: "Liquid",
                 table: "Product",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_SupplierId",
+                schema: "Liquid",
                 table: "Product",
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductTransaction_CustomerId",
+                schema: "Liquid",
                 table: "ProductTransaction",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductTransaction_ProductId",
+                schema: "Liquid",
                 table: "ProductTransaction",
                 column: "ProductId");
         }
@@ -180,22 +197,28 @@ namespace Liquid.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductTransaction");
+                name: "ProductTransaction",
+                schema: "Liquid");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "User",
+                schema: "Liquid");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customer",
+                schema: "Liquid");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Product",
+                schema: "Liquid");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Category",
+                schema: "Liquid");
 
             migrationBuilder.DropTable(
-                name: "Supplier");
+                name: "Supplier",
+                schema: "Liquid");
         }
     }
 }

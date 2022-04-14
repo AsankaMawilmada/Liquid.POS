@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Liquid.API.Infrastructure;
 using Liquid.API.Infrastructure.Security;
+using Liquid.Core.Constants;
+using Liquid.Core.Enums;
 using Liquid.Core.Services.Interfaces.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -70,6 +72,13 @@ namespace Liquid.API
                         }
                     };
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(PolicyConstants.RequireAdministratorRole, policy => policy.RequireRole(UserRole.Administrator.ToString()));
+                options.AddPolicy(PolicyConstants.RequirePurchaseOfficerRole, policy => policy.RequireRole(UserRole.PurchaseOfficer.ToString()));
+                options.AddPolicy(PolicyConstants.RequireCashierRole, policy => policy.RequireRole(UserRole.Cashier.ToString()));
+            });
         }
 
         public static void AddSerilogLogging(this ILoggerFactory loggerFactory)

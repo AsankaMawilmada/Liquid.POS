@@ -1,4 +1,8 @@
+using System;
 using System.Data;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Liquid.Core.Entities;
 using Liquid.Persistence.Contexts.Configurations;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +27,7 @@ namespace Liquid.Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("Liquid");
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -31,6 +36,22 @@ namespace Liquid.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new ProductTransactionConfiguration());
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            var entries = ChangeTracker.Entries().Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((BaseEntity)entityEntry.Entity).UpdatedOn = DateTimeOffset.UtcNow;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entityEntry.Entity).CreatedOn = DateTimeOffset.UtcNow;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         #region Transaction Handling
         public void BeginTransaction()

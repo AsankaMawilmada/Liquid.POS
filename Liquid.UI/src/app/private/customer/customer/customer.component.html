@@ -1,0 +1,25 @@
+<form *ngIf="f" [formGroup]="f" (ngSubmit)="submitForm()">
+  name:
+  <input type="text" formControlName="name" class="form-control" /><br />
+
+  phone:
+  <input type="text" formControlName="phone" class="form-control" /><br />
+
+  addressLine1:
+  <input type="text" formControlName="addressLine1" class="form-control" /><br />
+
+  addressLine2:
+  <input type="text" formControlName="addressLine2" class="form-control" /><br />
+
+  city:
+  <input type="text" formControlName="city" class="form-control" /><br />
+
+  state:
+  <input type="text" formControlName="state" class="form-control" /><br />
+
+  postalCode:
+  <input type="text" formControlName="postalCode" class="form-control" /><br />
+
+
+  <button type="submit" class="btn btn-primary" [disabled]='f.invalid || busy'>Save</button>
+</form>

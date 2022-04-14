@@ -3,6 +3,7 @@ using System;
 using Liquid.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Liquid.Persistence.Migrations
@@ -14,13 +15,17 @@ namespace Liquid.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("Liquid")
+                .UseIdentityColumns()
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.9");
 
             modelBuilder.Entity("Liquid.Core.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<Guid>("CategoryGuId")
                         .ValueGeneratedOnAdd()
@@ -28,19 +33,19 @@ namespace Liquid.Persistence.Migrations
                         .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTimeOffset>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("CategoryId");
@@ -52,23 +57,22 @@ namespace Liquid.Persistence.Migrations
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("AddressLine1")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("AddressLine2")
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<Guid>("CustomerGuId")
@@ -78,24 +82,21 @@ namespace Liquid.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
-                        .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("State")
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTimeOffset>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("CustomerId");
@@ -107,22 +108,22 @@ namespace Liquid.Persistence.Migrations
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.Property<Guid>("ProductGuId")
@@ -131,15 +132,16 @@ namespace Liquid.Persistence.Migrations
                         .HasDefaultValueSql("NEWID()");
 
                     b.Property<decimal>("PurchasedPrice")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("RegularPrice")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("SupplierId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("ProductId");
@@ -153,37 +155,39 @@ namespace Liquid.Persistence.Migrations
 
             modelBuilder.Entity("Liquid.Core.Entities.ProductTransaction", b =>
                 {
-                    b.Property<int>("ProductPurchaseId")
+                    b.Property<int>("ProductTransactionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<int?>("CustomerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductOrderNumber")
                         .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<decimal>("PurchasedPrice")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int>("Type")
+                    b.Property<short>("Type")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTimeOffset>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
-                    b.HasKey("ProductPurchaseId");
+                    b.HasKey("ProductTransactionId");
 
                     b.HasIndex("CustomerId");
 
@@ -196,42 +200,37 @@ namespace Liquid.Persistence.Migrations
                 {
                     b.Property<int>("SupplierId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("AddressLine1")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("AddressLine2")
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(75)
                         .HasColumnType("nvarchar(75)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
-                        .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("State")
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("SupplierGuId")
@@ -239,7 +238,8 @@ namespace Liquid.Persistence.Migrations
                         .HasColumnType("UniqueIdentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<DateTimeOffset>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("SupplierId");
@@ -251,12 +251,14 @@ namespace Liquid.Persistence.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -274,14 +276,15 @@ namespace Liquid.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(75)");
 
-                    b.Property<int>("Role")
+                    b.Property<short>("Role")
                         .HasColumnType("smallint");
 
                     b.Property<byte[]>("Salt")
                         .IsRequired()
                         .HasColumnType("varbinary(MAX)");
 
-                    b.Property<DateTimeOffset>("UpdatedOn")
+                    b.Property<DateTimeOffset?>("UpdatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<Guid>("UserGuId")

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Liquid.API.Features.Account
+namespace Liquid.API.Features.Accounts
 {
     public class LoginEnvelope
     {
@@ -23,6 +23,13 @@ namespace Liquid.API.Features.Account
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+
+    public class LoginCommand : IRequest<LoginEnvelope>
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+    
     public class CommandValidator : AbstractValidator<LoginCommand>
     {
         public CommandValidator()
@@ -32,13 +39,7 @@ namespace Liquid.API.Features.Account
         }
     }
 
-    public class LoginCommand : IRequest<LoginEnvelope>
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
-
-    public class Create : EndpointBaseAsync
+    public class Login : EndpointBaseAsync
         .WithRequest<LoginCommand>
         .WithActionResult<LoginEnvelope>
     {
@@ -46,7 +47,7 @@ namespace Liquid.API.Features.Account
         private readonly IPasswordHasher _passwordHasher;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        public Create(ILiquidContext context, IPasswordHasher passwordHasher, IJwtTokenGenerator jwtTokenGenerator)
+        public Login(ILiquidContext context, IPasswordHasher passwordHasher, IJwtTokenGenerator jwtTokenGenerator)
         {
             _context = context;
             _passwordHasher = passwordHasher;
@@ -59,8 +60,7 @@ namespace Liquid.API.Features.Account
         [SwaggerOperation(
             Summary = "Creates a JWT Token",
             Description = "Creates a JWT Token for valid user",
-            OperationId = "Account.LoginEndpoint",
-            Tags = new[] { "LoginEndpoint" })]
+            OperationId = "Account.LoginEndpoint")]
         public override async Task<ActionResult<LoginEnvelope>> HandleAsync([FromBody] LoginCommand request, CancellationToken cancellationToken)
         {
             const string message = "Invalid username or password.";
@@ -76,7 +76,7 @@ namespace Liquid.API.Features.Account
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Token = _jwtTokenGenerator.CreateToken(user.Username)
+                Token = _jwtTokenGenerator.CreateToken(user.Username, user.Role.ToString())
             };
         }
     }

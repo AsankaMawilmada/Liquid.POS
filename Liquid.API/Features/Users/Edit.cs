@@ -28,9 +28,9 @@
 
 //        public record Command(UserData User) : IRequest<UserEnvelope>;
 
-//        public class CommandValidator : AbstractValidator<Command>
+//        public class CreateCommandValidator : AbstractValidator<Command>
 //        {
-//            public CommandValidator()
+//            public CreateCommandValidator()
 //            {
 //                RuleFor(x => x.User).NotNull();
 //            }

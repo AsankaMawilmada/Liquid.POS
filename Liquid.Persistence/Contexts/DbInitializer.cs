@@ -22,7 +22,6 @@ namespace Liquid.Persistence.Contexts
                 var password = "Asanka@2022";
                 var user = new User
                 {
-                    UserId = 1,
                     FirstName = "Asanka",
                     LastName = "Mawilmada",
                     DateOfBirth = new DateTime(1979, 9, 26),
@@ -30,9 +29,7 @@ namespace Liquid.Persistence.Contexts
                     Hash = await passwordHasher.Hash(password, salt),
                     Salt = salt,
                     Role = UserRole.Administrator,
-                    Active = true,
-                    CreatedOn = DateTimeOffset.UtcNow,
-                    UpdatedOn = DateTimeOffset.UtcNow
+                    Active = true
                 };
 
                 await context.Users.AddAsync(user);

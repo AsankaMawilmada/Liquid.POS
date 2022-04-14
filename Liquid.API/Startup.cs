@@ -1,5 +1,4 @@
 using System.Reflection;
-using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -69,6 +68,9 @@ namespace Liquid.API
                     .AllowAnyMethod());
 
             app.UseAuthentication();
+
+
+
             app.UseMvc();
 
             app.ConfigureUseSwagger();

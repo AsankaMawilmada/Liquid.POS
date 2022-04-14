@@ -15,15 +15,14 @@ namespace Liquid.API.Infrastructure.Security
             _jwtOptions = jwtOptions.Value;
         }
 
-        public string CreateToken(string username)
+        public string CreateToken(string username, string roleName)
         {
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username),
                 new Claim(JwtRegisteredClaimNames.Jti, _jwtOptions.JtiGenerator()),
-                new Claim(JwtRegisteredClaimNames.Iat,
-                    new DateTimeOffset(_jwtOptions.IssuedAt).ToUnixTimeSeconds().ToString(),
-                    ClaimValueTypes.Integer64)
+                new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(_jwtOptions.IssuedAt).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+                new Claim(ClaimTypes.Role, roleName),
             };
             var jwt = new JwtSecurityToken(
                 _jwtOptions.Issuer,

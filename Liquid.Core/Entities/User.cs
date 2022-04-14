@@ -15,10 +15,8 @@ namespace Liquid.Core.Entities
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Username { get; set; }
-
         [JsonIgnore]
         public byte[] Hash { get; set; }
-
         [JsonIgnore]
         public byte[] Salt { get; set; }
         public UserRole Role { get; set; }

@@ -1,0 +1,12 @@
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+  <input type="text" formControlName="username" class="form-control" />
+  <app-form-field-errors [errors]="form.controls['username'].errors"></app-form-field-errors>
+  <br />
+  <input type="password" formControlName="password" class="form-control" />
+  <app-form-field-errors [errors]="form.controls['password'].errors"></app-form-field-errors>
+  <br />
+  <button type="submit" class="btn btn-primary" [disabled]='form.invalid || busy'>Login</button>
+
+  {{form.value | json}}
+  {{form.valid | json}}
+</form>

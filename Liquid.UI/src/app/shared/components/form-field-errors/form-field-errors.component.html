@@ -1,0 +1,28 @@
+<ul class="form-text text-danger" *ngIf="errors">
+  <li *ngIf="errors.alpha">{{errors.alpha.message}}</li>
+  <li *ngIf="errors.alphaNumeric">{{errors.alphaNumeric.message}}</li>
+  <li *ngIf="errors.compare">{{errors.compare.message}}</li>
+  <li *ngIf="errors.contains">{{errors.contains.message}}</li>
+  <li *ngIf="errors.creditcard">{{errors.creditcard.message}}</li>
+  <li *ngIf="errors.digit">{{errors.digit.message}}</li>
+  <li *ngIf="errors.email">{{errors.email.message}}</li>
+  <li *ngIf="errors.greaterThanEqualTo">{{errors.greaterThanEqualTo.message}}</li>
+  <li *ngIf="errors.greaterThan">{{errors.greaterThan.message}}</li>
+  <li *ngIf="errors.hexColor">{{errors.hexColor.message}}</li>
+  <li *ngIf="errors.json">{{errors.json.message}}</li>
+  <li *ngIf="errors.lessThanEqualTo">{{errors.lessThanEqualTo.message}}</li>
+  <li *ngIf="errors.lessThan">{{errors.lessThan.message}}</li>
+  <li *ngIf="errors.lowerCase">{{errors.lowerCase.message}}</li>
+  <li *ngIf="errors.maxLength">{{errors.maxLength.message}}</li>
+  <li *ngIf="errors.maxNumber">{{errors.maxNumber.message}}</li>
+  <li *ngIf="errors.minNumber">{{errors.minNumber.message}}</li>
+  <li *ngIf="errors.password">{{errors.password.message}}</li>
+  <li *ngIf="errors.pattern">{{errors.pattern.message}}</li>
+  <li *ngIf="errors.range">{{errors.range.message}}</li>
+  <li *ngIf="errors.required">{{errors.required.message}}</li>
+  <li *ngIf="errors.time">{{errors.time.message}}</li>
+  <li *ngIf="errors.upperCase">{{errors.upperCase.message}}</li>
+  <li *ngIf="errors.url">{{errors.url.message}}</li>
+  <li *ngIf="errors.zipCode">{{errors.zipCode.message}}</li>
+  <li *ngIf="errors.minLength">{{errors.minLength.message}}</li>
+</ul>

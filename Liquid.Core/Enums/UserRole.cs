@@ -8,7 +8,7 @@ namespace Liquid.Core.Enums
         Administrator = 1,
 
         [Description("Purchase Officer")]
-        OrganisationAdministrator = 2,
+        PurchaseOfficer = 2,
 
         [Description("Cashier")]
         Cashier = 3
